@@ -1,71 +1,51 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_ui_kit/localizations.dart';
-import 'package:flutter_ecommerce_ui_kit/models/popular.dart';
+import '../custom-icons/wishlist_icons.dart';
+import '../models/popular.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'categories.dart';
+import './drawer.dart';
 
-import 'drawer.dart';
-import 'slider.dart';
-
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class Home extends StatelessWidget {
   final List<Popular> imgList = [
     Popular(
-        title: 'BUCKET MEALS',
+        title: '15% off',
         imgUrl:
-            'https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=464&q=80'),
+            'https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/retaillabs/2021/11/15/ce58922b-29b3-4293-a8f0-b53f7ae051561636941813555-Extra-15--Off.jpg'),
     Popular(
-        title: 'BURGERS',
+        title: '40-70% off',
         imgUrl:
-            'https://images.unsplash.com/photo-1610970878459-a0e464d7592b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=924&q=80'),
+            'https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2021/11/14/7b972292-8065-4d53-9b79-75e3d34d2bbe1636879256987-Sweatshirts-_-Jackets.jpg'),
     Popular(
-        title: 'PIZZA',
+        title: 'urbanic',
         imgUrl:
-            'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80'),
+            'https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2021/11/14/072b09bf-a776-4179-b210-62b5c56391011636879257003-Trendiest-Styles.jpg'),
     Popular(
-        title: 'STRAWBERRIES',
+        title: 'myntra unique',
         imgUrl:
-            'https://images.unsplash.com/photo-1529082790703-f8a22cd2c208?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80')
+            'https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2021/11/14/20b40b95-79e0-4102-b771-3b266fc9be431636879256995-Sweatshirts-_-Jackets_2.jpg'),
+    Popular(
+        title: 'kid store',
+        imgUrl:
+            'https://assets.myntassets.com/f_webp,w_196,c_limit,fl_progressive,dpr_2.0/assets/images/2021/11/14/92b20a0c-4f8c-4e5c-81f3-bfc2a7e1cec01636879257010-T-Shirts-_-Tops.jpg'),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: AppDrawer(),
-      ),
-      body: SafeArea(
-        top: true,
-        left: false,
-        right: false,
-        child: CustomScrollView(
-            // Add the app bar and list of items as slivers in the next steps.
-            slivers: <Widget>[
+        body: SafeArea(
+            top: true,
+            left: false,
+            right: false,
+            child: CustomScrollView(slivers: <Widget>[
               SliverAppBar(
-                // Provide a standard title.
-                title: Text(
-                  'Welcome to KFC',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(255, 99, 71, 1)),
-                ),
                 pinned: false,
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.shopping_cart),
-                    onPressed: () {},
-                  )
-                ],
                 // Allows the user to reveal the app bar if they begin scrolling
                 // back up the list of items.
                 floating: true,
+                snap: false,
                 // Display a placeholder widget to visualize the shrinking size.
-                flexibleSpace: HomeSlider(),
+                flexibleSpace: Categories(),
                 // Make the initial height of the SliverAppBar larger than normal.
-                expandedHeight: 300,
+                expandedHeight: 80,
               ),
               SliverList(
                 // Use a delegate to build items as they're scrolled on screen.
@@ -75,10 +55,21 @@ class _HomeState extends State<Home> {
                   (context, index) => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      Container(
+                          child: Padding(
+                        padding: EdgeInsets.only(
+                            top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
+                        child: CachedNetworkImage(
+                            width: double.infinity,
+                            height: 180,
+                            fit: BoxFit.cover,
+                            imageUrl:
+                                'https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2021/11/14/83c153e7-3662-4b95-bf32-ca7feff012b21636877209860-HRX_Desk.jpg'),
+                      )),
                       Padding(
                         padding:
                             EdgeInsets.only(top: 14.0, left: 8.0, right: 8.0),
-                        child: Text('POPULAR',
+                        child: Text('BEST OFFERS',
                             // AppLocalizations.of(context)!
                             //         .translate('POPULAR') ??
                             //     '',
@@ -89,14 +80,14 @@ class _HomeState extends State<Home> {
                       ),
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 8.0),
-                        height: 240.0,
+                        height: 159.0,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: imgList.map((p) {
                             return Builder(
                               builder: (BuildContext context) {
                                 return Container(
-                                  width: 140.0,
+                                  width: 120.0,
                                   child: Card(
                                     clipBehavior: Clip.antiAlias,
                                     child: InkWell(
@@ -110,7 +101,7 @@ class _HomeState extends State<Home> {
                                             CrossAxisAlignment.start,
                                         children: <Widget>[
                                           SizedBox(
-                                            height: 160,
+                                            height: 150,
                                             child: Hero(
                                               tag: p.title,
                                               child: CachedNetworkImage(
@@ -126,17 +117,6 @@ class _HomeState extends State<Home> {
                                               ),
                                             ),
                                           ),
-                                          ListTile(
-                                            title: Text(
-                                              p.title,
-                                              style: TextStyle(fontSize: 14),
-                                            ),
-                                            subtitle: Text('\$200',
-                                                style: TextStyle(
-                                                    color: Colors.amberAccent,
-                                                    fontWeight:
-                                                        FontWeight.w700)),
-                                          )
                                         ],
                                       ),
                                     ),
@@ -236,21 +216,22 @@ class _HomeState extends State<Home> {
                       Container(
                         child: Padding(
                           padding: EdgeInsets.only(
-                              top: 6.0, left: 8.0, right: 8.0, bottom: 10),
+                              top: 6.0, left: 8.0, right: 8.0, bottom: 20),
                           child: Image(
                             fit: BoxFit.cover,
                             image: AssetImage('assets/images/banner-2.png'),
                           ),
                         ),
+                      ),
+                      Container(
+                        child: Text('data'),
                       )
                     ],
                   ),
                   // Builds 1000 ListTiles
                   childCount: 1,
                 ),
-              )
-            ]),
-      ),
-    );
+              ),
+            ])));
   }
 }
